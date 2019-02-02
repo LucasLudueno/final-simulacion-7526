@@ -14,35 +14,33 @@ class PageRank:
         linkGraph = np.matrix(linkGraph)
         nodesCount = linkGraph.shape[0]
 
-        # Fill darling nodes
-        # For each node write in columns 1/N if there exist an outgoing node link. N outgoing links
-        matrixWithoutDarling = []
-        for column in linkGraph.transpose():
-            rows = column.A[0]
-            outgoingLinksCount = sum(rows)
+        # Fill Dangling nodes
+        # For each node write in rows 1/N if there exist an outgoing node link. N outgoing links
+        matrixWithoutDangling = []
+        for row in linkGraph:
+            outgoingLinksCount = sum(row.A[0])
 
-            newMatrixColum = []
+            newMatrixRow = []
             if outgoingLinksCount == 0:
                 # If there is a node with no outgoing links, complete all column with 1/N. N nodes
-                newMatrixColum = [1.0 for x in range(nodesCount)]
+                newMatrixRow = [1.0 for x in range(nodesCount)]
             else:
-                newMatrixColum = rows
+                newMatrixRow = row.A[0]
             
-            matrixWithoutDarling.append(newMatrixColum)
+            matrixWithoutDangling.append(newMatrixRow)
 
-        matrixWithoutDarling = np.matrix(matrixWithoutDarling)
-        matrixWithoutDarling = matrixWithoutDarling.transpose()
+        matrixWithoutDangling = np.matrix(matrixWithoutDangling)
 
         # Transform in a Markov matrix
         markovMatrix = []
-        for rowArray in matrixWithoutDarling:
+        for rowArray in matrixWithoutDangling:
             row = rowArray.A[0]
             outgoingLinksCount = sum(row)
             newMatrixRow = [float(value) / outgoingLinksCount for value in row]
             markovMatrix.append(newMatrixRow)
         markovMatrix = np.matrix(markovMatrix)
 
-        # Complete the matrix with probabilities to other random nodes 
+        # Complete the matrix with probabilities to other nodes 
         adaptedMatrix = np.multiply(markovMatrix, norm_value)
 
         onesMatrix = np.ones((nodesCount, nodesCount))
