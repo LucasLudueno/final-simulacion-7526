@@ -2,27 +2,30 @@ import numpy as np
 from numpy.linalg import matrix_power
 
 class PageRank:
-    """ """
+    """ Module that compute Page Rank for each node of a graph """
 
-    def __init__(self, convergenceIterations = 50, normValue = 0.85 ):
-       self.convergence_iterations = convergenceIterations
-       self.matrix_normalization_value = normValue
+    def __init__(self, convergence_iterations = 52, norm_value = 0.85 ):
+       self.convergence_iterations = convergence_iterations # iterations when algorithm converge
+       self.matrix_normalization_value = norm_value         # value to normalize the matrix
 
-    def build_matrix(self, linkGraph):
+
+    """ Given a graph of urls, builds a probabilistic matrix for the PageRank algorithm
+    """
+    def build_matrix(self, urls_graph):
         norm_value = self.matrix_normalization_value
         # Build matrix given graph
-        linkGraph = np.matrix(linkGraph)
-        nodesCount = linkGraph.shape[0]
+        urls_graph = np.matrix(urls_graph)
+        nodesCount = urls_graph.shape[0]
 
         # Fill Dangling nodes
         # For each node write in rows 1/N if there exist an outgoing node link. N outgoing links
         matrixWithoutDangling = []
-        for row in linkGraph:
+        for row in urls_graph:
             outgoingLinksCount = sum(row.A[0])
 
             newMatrixRow = []
             if outgoingLinksCount == 0:
-                # If there is a node with no outgoing links, complete all column with 1/N. N nodes
+                # If there is a node with no outgoing links, complete all rows with 1/N. N nodes
                 newMatrixRow = [1.0 for x in range(nodesCount)]
             else:
                 newMatrixRow = row.A[0]
@@ -48,6 +51,10 @@ class PageRank:
         
         return adaptedMatrix + additionalMatrix
 
+
+    """ Given a normalize matrix that represents an url graph, returns an array where
+        each position represents a page in the row position of the matrix
+    """
     def calculate_page_rank(self, matrix):
         iterations = self.convergence_iterations
         pagesCount = matrix.shape[0]
