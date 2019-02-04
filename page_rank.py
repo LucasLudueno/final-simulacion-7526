@@ -5,7 +5,7 @@ import numpy as np
 from time import time
 from PageRank import PageRank
 
-DEFAULT_MATRIX_DIM = 2000
+DEFAULT_MATRIX_DIM = 4500
 
 def main(graph_file):
     file = open(graph_file, "r")
@@ -49,7 +49,7 @@ def main(graph_file):
         else:
             nodes_analysis[x] = { "rank": page_rank_values[x], "links": 0  } 
 
-    print "TOP 10 pages"
+    print "TOP 10 web pages"
     sorted_nodes = sorted(nodes_analysis.iteritems(), key=lambda (k,v): v["rank"], reverse=True)
 
     for key, value in sorted_nodes[0:10]:

@@ -38,7 +38,7 @@ Dentro de la carpeta `california_files` se podrán encontrar algunos ejemplos de
 
 Se recomienda comenzar ejecutando el archivo `urls_maps.json` dentro de la carpeta `example_files`
 
-_En particular el archivo original-file-california.txt fue extraido de la siguiente página: _
+_En particular el archivo original-file-california.txt fue extraido de la siguiente página web: http://www.cs.cornell.edu/courses/cs685/2002fa/_
 
 
 _Aclaración:_: por el momento, en el caso de proveer un archivo con muchas urls (> 10000), si muchas de ellas no son encontradas, el programa puede que demore un tiempo considerable (>30 minutos), sino el mismo ronda el orden de los minutos.
@@ -70,17 +70,27 @@ Luego se debe ejecutar el siguiente comando:
 
 y el resultado consistirá en otros dos archivos. Uno llamado `nombre_del_archivo.matrix.json` que contendrá una matriz de Markov preparada para hallar luego el page_rank de cada página. El otro llamado `nombre_del_archivo.page_rank.json` que contendrá un vector, donde cada valor representará el page rank de cada página, siguiendo las posiciones de los nodos dadas.
 
+_Aclaración_: dentro del script está establecido que el máximo de nodos que se leerán son 3000, dado que con estos consume 100% de CPU y aproximadamente 2 GB de memoria. En el caso de que se desee ejecutar con más nodos, solo hay que modificar la constante: `DEFAULT_MATRIX_DIM` dentro del script
+
 
 ### Archivos de Prueba
 
 Dentro de la carpeta `page_rank_files` se podrán encontrar ejemplos básicos de los archivos mencionados, con algunas matrices de prueba, de forma tal que se pueda ver las estructuras de los archivos e interacturar con ellos.
-Se recomienda comenzar ejecutando el archivo `basic_matrix.json`
-_En particular el archivo google_matrix.json fue extraido de la siguiente página: http://snap.stanford.edu/data/web-Google.html_
+Se recomienda comenzar ejecutando el archivo `basic_graph.txt`
+_En particular los archivos google_matrix.txt y notre_dam_graph.txt fueron extraidos de las siguiente páginas: http://snap.stanford.edu/data/ y http://networkrepository.com/web.php, donde también se pueden encontrar otros sets de datos_
 
 
+## Tests
 
-# TODO: MENCIONAR EL LINK A LOS DATOS REALES
+Para ejecutar los tests, en el directorio `tests` se debe ejecutar el siguiente comando:
+
+`python tests.py`
 
 
-# MEJORAS
+## Mejoras
 
+1. Eficiencia: si bien el proyecto es solo para mostrar cómo funciona el buscador de Google en base a PageRank, el mismo podría ser más eficiente aún sin cambiar de lenguaje de programación (C por ejemplo). En particular se podrían mejorar las operaciones con matrices.
+
+2. Experiencia en las búsquedas: también se podrían mejorar las búsquedas que se realizan en las páginas; por ejemplo, mejorando el parseo del html de las páginas para analizar su contenido, en lugar de buscar dentro de todo el html de la misma
+
+3. Flexibilidad: se podría mejorar aún más la flexibilidad de los scripts provistos para, por ejemplo, recibir por parámetros el número de iteraciones de PageRank que se desea calcular u otros de configurabilidad del sistema.
