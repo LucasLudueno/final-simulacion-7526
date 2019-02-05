@@ -49,6 +49,7 @@ class URLResolver:
 
         # Iterate each page url
         for number, url in urls_map.iteritems():
+            main_base_url = self.get_base_url(url["url"])
             html = url["content"]
             links = self.get_url_links(html)
 
@@ -61,7 +62,7 @@ class URLResolver:
                     for ady_number, ady_url in urls_map.iteritems():
                         base_ady_url = self.get_base_url(ady_url["url"])
 
-                        if base_url != "" and base_url == base_ady_url:  #  urlparse(link)[2] != urlparse(url["url"])[2]
+                        if base_url != "" and base_url == base_ady_url and base_url != main_base_url:
                             links_cont += 1
                             graph[int(number)][int(ady_number)] = 1
         

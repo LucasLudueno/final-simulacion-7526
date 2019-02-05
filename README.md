@@ -87,10 +87,26 @@ Para ejecutar los tests, en el directorio `tests` se debe ejecutar el siguiente 
 `python tests.py`
 
 
+## Bibliotecas necesarias para ejecutar el proyecto
+
+Se necesita tener `python 2.7` instalado: https://www.python.org/download/releases/2.7/
+
+Luego se necesitan tener instaladas estas bibliotecas de python (que pueden instalarse utilizando el comando `pip install nombre_biblioteca` https://www.makeuseof.com/tag/install-pip-for-python/)
+
+`numpy`
+`requests`
+`copy`
+`re`
+`json`
+`beautifulsoup4`
+
+
 ## Mejoras
 
-1. Eficiencia: si bien el proyecto es solo para mostrar cómo funciona el buscador de Google en base a PageRank, el mismo podría ser más eficiente aún sin cambiar de lenguaje de programación (C por ejemplo). En particular se podrían mejorar las operaciones con matrices.
+1. Performance: si bien el proyecto es solo para mostrar cómo funciona el buscador de Google en base a PageRank, el mismo podría ser más eficiente aún sin cambiar de lenguaje de programación (C por ejemplo). En particular se podrían mejorar las operaciones con matrices
 
 2. Experiencia en las búsquedas: también se podrían mejorar las búsquedas que se realizan en las páginas; por ejemplo, mejorando el parseo del html de las páginas para analizar su contenido, en lugar de buscar dentro de todo el html de la misma
 
-3. Flexibilidad: se podría mejorar aún más la flexibilidad de los scripts provistos para, por ejemplo, recibir por parámetros el número de iteraciones de PageRank que se desea calcular u otros de configurabilidad del sistema.
+3. Flexibilidad: se podría mejorar aún más la flexibilidad de los scripts provistos para, por ejemplo, recibir por parámetros el número de iteraciones de PageRank que se desea calcular u otros de configurabilidad del sistema
+
+4. Obtención de páginas web: también se puede mejorar la obtención de páginas web a través de internet, para hacer la misma más rápida y optimizando la cantidad de páginas obtenidas correctamente

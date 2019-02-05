@@ -64,6 +64,7 @@ class PageRank:
 
         # That operation represents: matrix ** N
         convergence_matrix = matrix_power(matrix, iterations)
+        print convergence_matrix
 
         # The page rank value for any page
         page_rank_values = np.matmul(initial_page_rank, convergence_matrix)

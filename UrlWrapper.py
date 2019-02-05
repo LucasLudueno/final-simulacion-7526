@@ -15,12 +15,9 @@ class UrlWrapper:
         try:
             response = requests.get(url, timeout = 3)
             if response.status_code < 400:
-                print url
                 return url
-            print "ERROR"
             return False
         except:
-            print "ERROR"
             return False
 
 
@@ -37,12 +34,14 @@ class UrlWrapper:
 
     """ Given a map of urls like: { "url": "http://google.com" }
         this function try to get each url content and save this content in the given map.
+        Urls that takes more than 3 seconds in retrieve their content, will be discarded.
+        (That is to not deteriorate the proyect performance)
 
         Example response: { "url": "http://google.com", content: "html content" }
     """
     def get_url_content(self, url_map):
         try:
-            response = requests.get(url_map["url"])
+            response = requests.get(url_map["url"], timeout = 3)
             if response.status_code < 400:
                 url_map["content"] = response.text
             else:
