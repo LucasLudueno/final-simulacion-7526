@@ -19,15 +19,17 @@ El archivo debe tener el siguiente formato:
 }
 ```
 
-Luego, se deberá ejecutar el script `main.py` con el siguiente comando, donde archivo_de_urls es el archivo descripto previamente:
+Luego, se deberá ejecutar el script `search.py` con el siguiente comando, donde archivo_de_urls es el archivo descripto previamente:
 
-`python main.py archivo_de_urls`
+`python search.py archivo_de_urls tipo_de_busqueda`
 
 Una vez ejecutado, el script tratará de buscar el contenido html de cada una de las páginas provistas y generará un nuevo archivo (`archivo_de_urls.content`), almacenando el contenido de las mismas (en un campo `content`) para, en caso de correr nuevamente el script con ese archivo, no tener que obtener el contenido nuevamente
 
 Después de obtener el contenido, se procederá a armar el grafo de la web provista, y a hallar el ranking de cada página utilizando el algoritmo de PageRank. También en este caso se generará un nuevo archivo (`archivo_de_urls.page_rank`), con un campo `page_rank` para cada página.
 
 Por último, una vez que se haya configurado correctamente la web, se permitirá al usuario realizar las búsquedas que desee, mostrando por pantalla las urls que coinciden con cada búsqueda realizada y ordenadas según su page rank.
+
+tipo_de_busqueda especifica si se desea ejecutar las búsquedas para que busque por título (`title`) o por contenido (`content`)
 
 
 ### Archivos de Prueba
@@ -39,6 +41,15 @@ Dentro de la carpeta `california_files` se podrán encontrar algunos ejemplos de
 Se recomienda comenzar ejecutando el archivo `urls_maps.json` dentro de la carpeta `example_files`
 
 _En particular el archivo original-file-california.txt fue extraido de la siguiente página web: http://www.cs.cornell.edu/courses/cs685/2002fa/_
+
+
+Los comandos típicos para ejecutar los archivos actuales son:
+
+`python search.py example_files/urls_map.json` o `python search.py example_files/urls_map.json` que ya posee todos los page rank cargados
+
+`python search.py california_files/little_urls_maps.json` o `python search.py california_files/little_urls_maps.json.page_rank` que ya posee todos los page rank cargados
+
+`python search.py california_files/original_urls_maps.json` (tardará ~30 min en cargarlo) o `python search.py california_files/original_urls_maps.json.page_rank` que ya posee todos los page rank cargados
 
 
 _Aclaración:_: por el momento, en el caso de proveer un archivo con muchas urls (> 10000), si muchas de ellas no son encontradas, el programa puede que demore un tiempo considerable (>30 minutos), sino el mismo ronda el orden de los minutos.
@@ -78,6 +89,14 @@ _Aclaración_: dentro del script está establecido que el máximo de nodos que s
 Dentro de la carpeta `page_rank_files` se podrán encontrar ejemplos básicos de los archivos mencionados, con algunas matrices de prueba, de forma tal que se pueda ver las estructuras de los archivos e interacturar con ellos.
 Se recomienda comenzar ejecutando el archivo `basic_graph.txt`
 _En particular los archivos google_matrix.txt y notre_dam_graph.txt fueron extraidos de las siguiente páginas: http://snap.stanford.edu/data/ y http://networkrepository.com/web.php, donde también se pueden encontrar otros sets de datos_
+
+Los comandos típicos para ejecutar los archivos actuales son:
+
+`python page_rank.py page_rank_files/basic_graph.txt`
+
+`python page_rank.py page_rank_files/epa_graph.txt`
+
+`python page_rank.py page_rank_files/notre_dam_graph.txt`
 
 
 ## Tests

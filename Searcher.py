@@ -17,7 +17,7 @@ class Searcher:
 
         Example response: [(url1, 0.88999), (url2, 0.888222)
     """
-    def search(self, text_to_search, search_type = "content"):
+    def search(self, text_to_search, search_type = "title"):
         match_urls = []
         for url in self.urls_map.values():
             # Extract url content
