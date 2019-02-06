@@ -23,13 +23,13 @@ Luego, se deberá ejecutar el script `search.py` con el siguiente comando, donde
 
 `python search.py archivo_de_urls tipo_de_busqueda`
 
-Una vez ejecutado, el script tratará de buscar el contenido html de cada una de las páginas provistas y generará un nuevo archivo (`archivo_de_urls.content`), almacenando el contenido de las mismas (en un campo `content`) para, en caso de correr nuevamente el script con ese archivo, no tener que obtener el contenido nuevamente
+Una vez ejecutado, el script tratará de buscar el contenido html de cada una de las páginas provistas y generará un nuevo archivo (`archivo_de_urls.content`), almacenando el contenido de las mismas (en un campo `content`) para, en caso de correr nuevamente el script con ese archivo, no tener que obtener el contenido nuevamente en caso de que se lo quiera ejecutar devuelta.
 
 Después de obtener el contenido, se procederá a armar el grafo de la web provista, y a hallar el ranking de cada página utilizando el algoritmo de PageRank. También en este caso se generará un nuevo archivo (`archivo_de_urls.page_rank`), con un campo `page_rank` para cada página.
 
 Por último, una vez que se haya configurado correctamente la web, se permitirá al usuario realizar las búsquedas que desee, mostrando por pantalla las urls que coinciden con cada búsqueda realizada y ordenadas según su page rank.
 
-tipo_de_busqueda especifica si se desea ejecutar las búsquedas para que busque por título (`title`) o por contenido (`content`)
+`tipo_de_busqueda` especifica si se desea ejecutar las búsquedas para que busque por título (`title`) o por contenido (`content`)
 
 
 ### Archivos de Prueba
@@ -52,20 +52,19 @@ Los comandos típicos para ejecutar los archivos actuales son:
 `python search.py california_files/original_urls_maps.json` (tardará ~30 min en cargarlo) o `python search.py california_files/original_urls_maps.json.page_rank` que ya posee todos los page rank cargados
 
 
-_Aclaración:_: por el momento, en el caso de proveer un archivo con muchas urls (> 10000), si muchas de ellas no son encontradas, el programa puede que demore un tiempo considerable (>30 minutos), sino el mismo ronda el orden de los minutos.
+_Aclaración:_ por el momento, en el caso de proveer un archivo con muchas urls (> 10000), si muchas de ellas no son encontradas, el programa puede que demore un tiempo considerable (alrededor de los 30 minutos o más, dependiendo de la computadora utilizada).
 
 
 ## Algoritmo de Page Rank
 
 También este proyecto, provee un script para ejecutar el algoritmo de PageRank y poder analizar cómo funciona el mismo.
 
-Para ello, es necesario proveer un archivo que represente a un grafo de la web. Debe tener definidas la cantidad de nodos (páginas) y aristas (referencias a otras páginas) que se utilizarán (serán la primera y la segunda línea del archivo respectivamente) y luego las siguientes líneas, las aristas que las interconectan (si fue del nodo i al j)
+Para ello, es necesario proveer un archivo que represente a un grafo de la web. Debe tener definidas la cantidad de nodos (páginas) que se utilizarán (será la primera línea del archivo) y luego las siguientes líneas, las aristas que las interconectan (si es del nodo i al j)
 
-El archivo debe tener una estructura similar a la siguiente (1000000 nodos y 1300000 aristas):
+El archivo debe tener una estructura similar a la siguiente (1000000 nodos):
 
 ```
 1000000
-1300000
 0	867923
 0	891835
 11342	0
@@ -122,10 +121,12 @@ Luego se necesitan tener instaladas estas bibliotecas de python (que pueden inst
 
 ## Mejoras
 
-1. Performance: si bien el proyecto es solo para mostrar cómo funciona el buscador de Google en base a PageRank, el mismo podría ser más eficiente aún sin cambiar de lenguaje de programación (C por ejemplo). En particular se podrían mejorar las operaciones con matrices
+1. _Performance:_ si bien el proyecto es solo para mostrar cómo funciona el buscador de Google en base a PageRank, el mismo podría ser más eficiente aún sin cambiar de lenguaje de programación (C por ejemplo). En particular se podrían mejorar las operaciones con matrices
 
-2. Experiencia en las búsquedas: también se podrían mejorar las búsquedas que se realizan en las páginas; por ejemplo, mejorando el parseo del html de las páginas para analizar su contenido, en lugar de buscar dentro de todo el html de la misma
+2. _Experiencia en las búsquedas:_ también se podrían mejorar las búsquedas que se realizan en las páginas; por ejemplo, mejorando el parseo del html de las páginas para analizar su contenido, en lugar de buscar dentro de todo el html de la misma
 
-3. Flexibilidad: se podría mejorar aún más la flexibilidad de los scripts provistos para, por ejemplo, recibir por parámetros el número de iteraciones de PageRank que se desea calcular u otros de configurabilidad del sistema
+3. _Flexibilidad:_ se podría mejorar aún más la flexibilidad de los scripts provistos para, por ejemplo, recibir por parámetros el número de iteraciones de PageRank que se desea calcular u otros de configurabilidad del sistema
 
-4. Obtención de páginas web: también se puede mejorar la obtención de páginas web a través de internet, para hacer la misma más rápida y optimizando la cantidad de páginas obtenidas correctamente
+4. _Obtención de páginas web:_ también se puede mejorar la obtención de páginas web a través de internet, para hacer la misma más rápida y optimizando la cantidad de páginas obtenidas correctamente
+
+4. _Memoria consumida:_ dado que la aplicación carga los archivos junto con su contenido en memoria, esto puede llegar a ser una limitación si se desean realizar pruebas con sets de datos muy grandes. Se puede optimizar utilizando más memoria o simplemente guardar el contenido de las páginas en alguna base de datos externa o en disco (aunque sea una manera más lenta) 

@@ -15,7 +15,8 @@ from UrlWrapper import UrlWrapper
     It allows you to search into a web pages and retrieves the pages that matches with
     the searches using the PageRank algorithm of Google.
 
-    The only parameter that receives is a file path of a maps urls that should have a content like this:
+    The two parameters that receives is the search_type and a file path of a maps urls that
+    should have a content like this:
     { "0": { "url": "http://www.google.com/", "content": "html content", page_rank: 0.9 }, ...  }
 
     where the only required field if "url". If the content or the page rank is not added, this module

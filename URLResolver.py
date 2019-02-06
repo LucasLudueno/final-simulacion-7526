@@ -53,7 +53,7 @@ class URLResolver:
             html = url["content"]
             links = self.get_url_links(html)
 
-            # Iterate liks founded into each page urls
+            # Iterate liks found into each page urls
             for link in links:
                 if link != None:
                     base_url = self.get_base_url(link)
@@ -66,7 +66,7 @@ class URLResolver:
                             links_cont += 1
                             graph[int(number)][int(ady_number)] = 1
         
-        # print "Total links between pages: " + str(links_count)
+        print "Total links between pages: " + str(links_count)
         return graph
 
 

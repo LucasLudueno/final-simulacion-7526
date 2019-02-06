@@ -1,10 +1,13 @@
 import numpy as np
 from numpy.linalg import matrix_power
 
+CONVERGENCE_ITERATIONS = 52
+NORMALIZATION_VALUE = 0.85
+
 class PageRank:
     """ Module that compute Page Rank for each node of a graph """
 
-    def __init__(self, convergence_iterations = 52, norm_value = 0.85 ):
+    def __init__(self, convergence_iterations = CONVERGENCE_ITERATIONS, norm_value = NORMALIZATION_VALUE ):
        self.convergence_iterations = convergence_iterations # iterations when algorithm converge
        self.matrix_normalization_value = norm_value         # value to normalize the matrix
 
@@ -52,7 +55,7 @@ class PageRank:
         return adaptedMatrix + additionalMatrix
 
 
-    """ Given a normalize matrix that represents an url graph, returns an array where
+    """ Given a normalized matrix that represents an url graph, returns an array where
         each position represents a page in the row position of the matrix
     """
     def calculate_page_rank(self, matrix):
@@ -64,7 +67,6 @@ class PageRank:
 
         # That operation represents: matrix ** N
         convergence_matrix = matrix_power(matrix, iterations)
-        print convergence_matrix
 
         # The page rank value for any page
         page_rank_values = np.matmul(initial_page_rank, convergence_matrix)

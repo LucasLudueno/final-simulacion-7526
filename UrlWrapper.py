@@ -9,7 +9,7 @@ from concurrent.futures import ThreadPoolExecutor, wait, as_completed
 class UrlWrapper:
     """ Module to fetch urls and get its content """
 
-    """ Head urls to check it exists or not
+    """ Head urls to check if exists or not
     """
     def head_url(self, url):
         try:
@@ -21,7 +21,7 @@ class UrlWrapper:
             return False
 
 
-    """ Head urls to check it exists or not and return only the valid ones
+    """ Head urls to check if exists or not and return only the valid ones
     """
     def head_urls_content(self, urls, workers = 25):
         results = []

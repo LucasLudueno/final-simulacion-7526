@@ -18,20 +18,21 @@ class Searcher:
         Example response: [(url1, 0.88999), (url2, 0.888222)
     """
     def search(self, text_to_search, search_type = "title"):
+        lower_text = text_to_search.lower()
         match_urls = []
         for url in self.urls_map.values():
             # Extract url content
             content = url["content"]
-            soup = BeautifulSoup.BeautifulSoup(content.lower()) # TODO: MAKE IT OUT
+            soup = BeautifulSoup.BeautifulSoup(content.lower())
 
             # Search by title or content
             if search_type == "title":  
                 has_title = soup.html and soup.html.head and soup.html.head.title and soup.html.head.title.string
-                if has_title and text_to_search in soup.html.head.title.string:
+                if has_title and lower_text in soup.html.head.title.string:
                     match_urls.append((url["url"], url["page_rank"]))
 
             else:
-                if soup.find(text=re.compile(text_to_search)) != None:
+                if soup.find(text=re.compile(lower_text)) != None:
                     match_urls.append((url["url"], url["page_rank"]))
 
         # Sort urls that have matched with the text_to_search
