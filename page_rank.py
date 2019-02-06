@@ -34,7 +34,7 @@ def main(graph_file):
     markov_matrix = pageRank.build_matrix(graph)
 
     print "Calculating Page Rank values..."
-    page_rank_values = pageRank.calculate_page_rank(markov_matrix)
+    page_rank_values = pageRank.calculate_page_rank(markov_matrix, "eigen")
 
     print "Saving files..."
     with open(str(graph_file) + ".matrix.json", "w") as file:

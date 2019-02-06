@@ -75,19 +75,19 @@ class PageRank:
             # Calculate eigen values and vectors
             w, v = LA.eig(matrix)
             eigen_values_vectors = []
-            eigen_values = w.real
+            eigen_values = w
             
             cont = 0
             for column in v.T:
                 eigen_values_vectors.append((eigen_values[cont], column))
                 cont += 1
 
-            eigen_values_vectors.sort(key=lambda tup: tup[0])
+            eigen_values_vectors.sort(key=lambda tup: abs(tup[0]))
 
             # Calculate eigen value matrix
             eigen_vector_matrix = []
-            eigen_value_matrix = np.zeros([pagesCount, pagesCount])
-            for i in range(len(eigen_values_vectors)):
+            eigen_value_matrix = np.zeros([pagesCount, pagesCount], dtype=complex)
+            for i in xrange(len(eigen_values_vectors)):
                 eigen_value_matrix[i][i] = eigen_values_vectors[i][0]
                 eigen_vector_matrix.append(eigen_values_vectors[i][1].tolist()[0])
             

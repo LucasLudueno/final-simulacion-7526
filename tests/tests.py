@@ -37,7 +37,7 @@ class TestPageRankClass(unittest.TestCase):
         self.assertTrue(np.allclose(stacionary_state, page_rank_value))
 
     def test_page_rank_properties_with_1000_nodes(self):
-        file = open("../page_rank_files/notre_dam_graph.txt", "r")
+        file = open("../page_rank_files/epa_graph.txt", "r")
         file.readline()
         nodes = 1000
         page_graph = np.zeros([nodes, nodes], dtype=np.uint8)
@@ -55,17 +55,28 @@ class TestPageRankClass(unittest.TestCase):
         matrix = pageRank.build_matrix(page_graph)
         for row in matrix:
             values_sum = sum(row.A[0])
-            self.assertTrue(values_sum, 1.0)
+
+            for value in row.A[0]:
+                self.assertTrue(0.0 < value)
+                self.assertTrue(value < 1.00000000001)
+
+            self.assertTrue(0.99999999999 < values_sum)
+            self.assertTrue(values_sum < 1.00000000001)
 
         # check all page rank values sum is 1.0
         page_rank_values = pageRank.calculate_page_rank(matrix)
+        for value in page_rank_values:
+            self.assertTrue(0.0 < value)
+            self.assertTrue(value < 1.00000000001)
+
         total_page_rank = sum(page_rank_values)
-        self.assertTrue(total_page_rank, 1.0)
+        self.assertTrue(0.99999999999 < total_page_rank)
+        self.assertTrue(total_page_rank < 1.00000000001)
 
     def test_page_rank_matrix_with_eigen_and_multiply_operations(self):
         file = open("../page_rank_files/notre_dam_graph.txt", "r")
         file.readline()
-        nodes = 500
+        nodes = 100
         page_graph = np.zeros([nodes, nodes])
 
         # Iterate edges in file and add them to the graph
@@ -81,18 +92,34 @@ class TestPageRankClass(unittest.TestCase):
         matrix = pageRank.build_matrix(page_graph)
         for row in matrix:
             values_sum = sum(row.A[0])
-            self.assertTrue(values_sum, 1.0)
 
-        # check page rank values with eigen vector operations and eigen values operations are the same
-        eigen_page_rank_values = pageRank.calculate_page_rank(matrix, "eigen")
-        page_rank_values = pageRank.calculate_page_rank(matrix, "matrix")
+            for value in row.A[0]:
+                self.assertTrue(0.0 < value)
+                self.assertTrue(value < 1.00000000001)
+
+            self.assertTrue(0.99999999999 < values_sum)
+            self.assertTrue(values_sum < 1.00000000001)
 
         # check all page rank values sum is 1.0
-        total_page_rank = sum(page_rank_values)
-        total_page_rank_eigen = sum(eigen_page_rank_values)
+        page_rank_values = pageRank.calculate_page_rank(matrix, "matrix")
+        for value in page_rank_values:
+            self.assertTrue(0.0 < value)
+            self.assertTrue(value < 1.00000000001)
 
-        self.assertTrue(total_page_rank, 1.0)
-        self.assertTrue(total_page_rank_eigen, 1.0)
+        total_page_rank = sum(page_rank_values)
+        self.assertTrue(0.99999999999 < total_page_rank)
+        self.assertTrue(total_page_rank < 1.00000000001)
+
+        # check all page rank values sum is 1.0 (the presission is not equal)
+        eigen_page_rank_values = pageRank.calculate_page_rank(matrix, "eigen")
+        total_page_rank_eigen = sum(eigen_page_rank_values)
+        for value in eigen_page_rank_values:
+            self.assertTrue(0.0 < value)
+            self.assertTrue(value < 1.00000000001)
+
+        self.assertTrue(0.99999 < total_page_rank_eigen)
+        self.assertTrue(total_page_rank_eigen < 1.000001)
+
 
 if __name__ == '__main__':
     unittest.main()
