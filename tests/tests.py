@@ -65,9 +65,3 @@ class TestPageRankClass(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-
-# TODO: GRAFO DE REFERENCIAS????
-# TODO: GRAN MATRIZ Y CHEQUEAR QUE LA SUMA DEL PAGERANK ES 1
-# TODO: debug mode
-# TODO: BUSCAR SOLO POR PALABRAS 
-# TODO: ARCHIVO CONFIG?
