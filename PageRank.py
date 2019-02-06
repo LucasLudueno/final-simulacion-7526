@@ -1,4 +1,7 @@
 import numpy as np
+
+from numpy.linalg import inv
+from numpy import linalg as LA
 from numpy.linalg import matrix_power
 
 CONVERGENCE_ITERATIONS = 52
@@ -58,15 +61,48 @@ class PageRank:
     """ Given a normalized matrix that represents an url graph, returns an array where
         each position represents a page in the row position of the matrix
     """
-    def calculate_page_rank(self, matrix):
+    def calculate_page_rank(self, matrix, convergence_type = "matrix"):
         iterations = self.convergence_iterations
         pagesCount = matrix.shape[0]
 
         # Initial page rank vector. All pages with same probability
         initial_page_rank = [1.0 / pagesCount for x in range(pagesCount)]
 
-        # That operation represents: matrix ** N
-        convergence_matrix = matrix_power(matrix, iterations)
+        if convergence_type == "matrix":
+            # That operation represents: matrix ** N
+            convergence_matrix = matrix_power(matrix, iterations)
+        else:
+            # Calculate eigen values and vectors
+            w, v = LA.eig(matrix)
+            eigen_values_vectors = []
+            eigen_values = w.real
+            
+            cont = 0
+            for column in v.T:
+                eigen_values_vectors.append((eigen_values[cont], column))
+                cont += 1
+
+            eigen_values_vectors.sort(key=lambda tup: tup[0])
+
+            # Calculate eigen value matrix
+            eigen_vector_matrix = []
+            eigen_value_matrix = np.zeros([pagesCount, pagesCount])
+            for i in range(len(eigen_values_vectors)):
+                eigen_value_matrix[i][i] = eigen_values_vectors[i][0]
+                eigen_vector_matrix.append(eigen_values_vectors[i][1].tolist()[0])
+            
+            eigen_vector_matrix = np.matrix(eigen_vector_matrix)
+            eigen_vector_matrix = eigen_vector_matrix.T
+
+            # That operation represents: matrix ** N
+            convergence_eigen_matrix = matrix_power(eigen_value_matrix, iterations)
+
+            # Calculate eigen vector matrix
+            inverse_eigen_vector_matrix = inv(eigen_vector_matrix)
+
+            # Calculate the result matrix: P * Dn * P-1
+            partial_convergence_matrix = np.matmul(eigen_vector_matrix, convergence_eigen_matrix)
+            convergence_matrix = np.matmul(partial_convergence_matrix, inverse_eigen_vector_matrix).real  
 
         # The page rank value for any page
         page_rank_values = np.matmul(initial_page_rank, convergence_matrix)

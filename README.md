@@ -121,12 +121,12 @@ Luego se necesitan tener instaladas estas bibliotecas de python (que pueden inst
 
 ## Mejoras
 
-1. _Performance:_ si bien el proyecto es solo para mostrar cómo funciona el buscador de Google en base a PageRank, el mismo podría ser más eficiente aún sin cambiar de lenguaje de programación (C por ejemplo). En particular se podrían mejorar las operaciones con matrices
+1. _Experiencia en las búsquedas:_ también se podrían mejorar las búsquedas que se realizan en las páginas; por ejemplo, mejorando el parseo del html de las páginas para analizar su contenido, en lugar de buscar que las frases se encuentren dentro de todo el html de la misma, sin separar entre las palabras del contenido.
 
-2. _Experiencia en las búsquedas:_ también se podrían mejorar las búsquedas que se realizan en las páginas; por ejemplo, mejorando el parseo del html de las páginas para analizar su contenido, en lugar de buscar que las frases se encuentren dentro de todo el html de la misma, sin separar entre las palabras del contenido.
+2. _Flexibilidad:_ se podría mejorar aún más la flexibilidad de los scripts provistos para, por ejemplo, recibir por parámetros el número de iteraciones de PageRank que se desea calcular u otros de configurabilidad del sistema
 
-3. _Flexibilidad:_ se podría mejorar aún más la flexibilidad de los scripts provistos para, por ejemplo, recibir por parámetros el número de iteraciones de PageRank que se desea calcular u otros de configurabilidad del sistema
-
-4. _Obtención de páginas web:_ también se puede mejorar la obtención de páginas web a través de internet, para hacer la misma más rápida y optimizando la cantidad de páginas obtenidas correctamente
+3. _Obtención de páginas web:_ también se puede mejorar la obtención de páginas web a través de internet, para hacer la misma más rápida y optimizando la cantidad de páginas obtenidas correctamente
 
 4. _Memoria consumida:_ dado que la aplicación carga los archivos junto con su contenido en memoria, esto puede llegar a ser una limitación si se desean realizar pruebas con sets de datos muy grandes. Se puede optimizar utilizando más memoria o simplemente guardar el contenido de las páginas en alguna base de datos externa o en disco (aunque sea una manera más lenta) 
+
+5. _Performance:_ si bien el proyecto es solo para mostrar cómo funciona el buscador de Google en base a PageRank, el mismo podría ser más eficiente aún sin cambiar de lenguaje de programación (C por ejemplo). En particular se podrían mejorar las operaciones con matrices (por ejemplo, cuando la matriz es demasiado grande (dim 1500), la multiplicación de la misma falla utilizando autovalores y autovectores; aunque a fines prácticos se ha decidido dada la similitud en perforce entre las dos maneras de multiplicar matrices, no utilizar este caso por defecto)
