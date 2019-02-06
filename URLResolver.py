@@ -66,7 +66,7 @@ class URLResolver:
                             links_cont += 1
                             graph[int(number)][int(ady_number)] = 1
         
-        print "Total links between pages: " + str(links_count)
+        print "Total links between pages: " + str(links_cont)
         return graph
 
 

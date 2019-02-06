@@ -80,7 +80,7 @@ Luego se debe ejecutar el siguiente comando:
 
 y el resultado consistirá en otros dos archivos. Uno llamado `nombre_del_archivo.matrix.json` que contendrá una matriz de Markov preparada para hallar luego el page_rank de cada página. El otro llamado `nombre_del_archivo.page_rank.json` que contendrá un vector, donde cada valor representará el page rank de cada página, siguiendo las posiciones de los nodos dadas.
 
-_Aclaración_: dentro del script está establecido que el máximo de nodos que se leerán son 3000, dado que con estos consume 100% de CPU y aproximadamente 2 GB de memoria. En el caso de que se desee ejecutar con más nodos, solo hay que modificar la constante: `DEFAULT_MATRIX_DIM` dentro del script
+_Aclaración_: dentro del script está establecido que el máximo de nodos que se leerán son 2000, dado que con estos consume 100% de CPU y aproximadamente 2 GB de memoria. En el caso de que se desee ejecutar con más nodos, solo hay que modificar la constante: `DEFAULT_MATRIX_DIM` dentro del script
 
 
 ### Archivos de Prueba
@@ -123,7 +123,7 @@ Luego se necesitan tener instaladas estas bibliotecas de python (que pueden inst
 
 1. _Performance:_ si bien el proyecto es solo para mostrar cómo funciona el buscador de Google en base a PageRank, el mismo podría ser más eficiente aún sin cambiar de lenguaje de programación (C por ejemplo). En particular se podrían mejorar las operaciones con matrices
 
-2. _Experiencia en las búsquedas:_ también se podrían mejorar las búsquedas que se realizan en las páginas; por ejemplo, mejorando el parseo del html de las páginas para analizar su contenido, en lugar de buscar dentro de todo el html de la misma
+2. _Experiencia en las búsquedas:_ también se podrían mejorar las búsquedas que se realizan en las páginas; por ejemplo, mejorando el parseo del html de las páginas para analizar su contenido, en lugar de buscar que las frases se encuentren dentro de todo el html de la misma, sin separar entre las palabras del contenido.
 
 3. _Flexibilidad:_ se podría mejorar aún más la flexibilidad de los scripts provistos para, por ejemplo, recibir por parámetros el número de iteraciones de PageRank que se desea calcular u otros de configurabilidad del sistema
 

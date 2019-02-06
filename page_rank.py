@@ -5,7 +5,7 @@ import numpy as np
 from time import time
 from PageRank import PageRank
 
-DEFAULT_MATRIX_DIM = 3000
+DEFAULT_MATRIX_DIM = 2000
 
 def main(graph_file):
     file = open(graph_file, "r")
