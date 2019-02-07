@@ -7,12 +7,12 @@ from PageRank import PageRank
 
 DEFAULT_MATRIX_DIM = 2000
 
-def main(graph_file):
+def main(graph_file, convergence_method = "matrix", nodes_count = DEFAULT_MATRIX_DIM):
     file = open(graph_file, "r")
     nodes_analysis = {}
     nodes = int(file.readline())
-    if nodes > DEFAULT_MATRIX_DIM:
-        nodes = DEFAULT_MATRIX_DIM
+    if nodes > nodes_count:
+        nodes = nodes_count
     graph = np.zeros([nodes, nodes], dtype=np.uint8)
 
     # Iterate edges in file and add them to the graph
@@ -34,7 +34,7 @@ def main(graph_file):
     markov_matrix = pageRank.build_matrix(graph)
 
     print "Calculating Page Rank values..."
-    page_rank_values = pageRank.calculate_page_rank(markov_matrix)
+    page_rank_values = pageRank.calculate_page_rank(markov_matrix, convergence_method)
 
     print "Saving files..."
     with open(str(graph_file) + ".matrix.json", "w") as file:
@@ -57,6 +57,11 @@ def main(graph_file):
 
 
 if __name__ == "__main__":
-	if len(sys.argv) != 2:
-		raise ValueError('The script only allow one parameter')
-	sys.exit(main(sys.argv[1]))
+    convergence_method = "matrix"
+    nodes_count = 2000
+    if len(sys.argv) == 4:
+        convergence_method = sys.argv[2]
+        nodes_count = int(sys.argv[3])
+    if len(sys.argv) == 3:
+	    convergence_method = sys.argv[2]
+    sys.exit(main(sys.argv[1], convergence_method, nodes_count))

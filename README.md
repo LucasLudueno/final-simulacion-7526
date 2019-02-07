@@ -76,9 +76,15 @@ El archivo debe tener una estructura similar a la siguiente (1000000 nodos):
 
 Luego se debe ejecutar el siguiente comando:
 
-`python page_rank.py nombre_del_archivo`
+`python page_rank.py nombre_del_archivo tipo_de_convergencia cantidad_nodos`
 
 y el resultado consistirá en otros dos archivos. Uno llamado `nombre_del_archivo.matrix.json` que contendrá una matriz de Markov preparada para hallar luego el page_rank de cada página. El otro llamado `nombre_del_archivo.page_rank.json` que contendrá un vector, donde cada valor representará el page rank de cada página, siguiendo las posiciones de los nodos dadas.
+
+Los parámetros tipo_de_convergencia y cantidad_nodos son opcionales y sus valores por defecto son: "matrix" para el primer parámetro y 2000 para el segundo.
+En el caso de tipo_de_convergencia los tipos permitidos son: matrix random y eigen.
+`matrix:` halla la convergencia de la matriz de probabilidades en n pasos, a través de la multiplicación de la matriz sobre si misma.
+`random:` halla la convergencia de la matriz de probabilidades en n pasos, a través de navegar sobre todo el grafo de la web de manera random, siguiendo las probabilidades de cada arista.
+`eigen:` halla la convergencia de la matriz de probabilidades en n pasos, a través de la multiplicación de la matriz diagonal D de autovalores sobre si misma y luego ejecuta la siguiente operacion E.Dn.E-1 donde E es la matriz de autovectores posicionados en columnas y Dn el resultado de multiplicar D n veces.
 
 _Aclaración_: dentro del script está establecido que el máximo de nodos que se leerán son 2000, dado que con estos consume 100% de CPU y aproximadamente 2 GB de memoria. En el caso de que se desee ejecutar con más nodos, solo hay que modificar la constante: `DEFAULT_MATRIX_DIM` dentro del script
 
