@@ -7,6 +7,19 @@ from PageRank import PageRank
 
 DEFAULT_MATRIX_DIM = 2000
 
+""" This module represents the engine of the PageRank algorithm.
+    Given a graph inside a file, it allows to calculate the probabilistic matrix of the
+    algorithm and the page rank values for each page (node of the graph) 
+
+    The two parameters that receives are the graph_file, the convergence_method (matrix, random)
+    and number of nodes to process.
+    The graph file should have the following format:
+    nodes_count
+    i j
+    j k
+
+    where i, j and k indicate the edges of the directed graph.
+"""
 def main(graph_file, convergence_method = "matrix", nodes_count = DEFAULT_MATRIX_DIM):
     file = open(graph_file, "r")
     nodes_analysis = {}

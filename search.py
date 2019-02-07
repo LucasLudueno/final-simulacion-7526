@@ -66,7 +66,7 @@ def main(urls_map_file, search_type = "content"):
 
 
 if __name__ == "__main__":
-    search_type = "title"
+    search_type = "content"
     if len(sys.argv) == 3:
 	    search_type = sys.argv[2]
     sys.exit(main(sys.argv[1], search_type))

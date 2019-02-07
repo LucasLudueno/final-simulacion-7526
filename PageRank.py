@@ -93,7 +93,7 @@ class PageRank:
         iterations = self.convergence_iterations
         pagesCount = matrix.shape[0]
         
-        total_states_count = iterations * pagesCount ** 2
+        total_states_count = iterations * pagesCount
         print "Iterations: " + str(total_states_count)
 
         # Calculate the acum probabibility matrix per row
