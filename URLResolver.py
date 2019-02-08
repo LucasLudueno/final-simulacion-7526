@@ -25,7 +25,8 @@ class URLResolver:
         
         # Add the page rank field to urls_map object
         for x in range(len(page_rank_values)):
-            urls_map[str(x)]["page_rank"] = page_rank_values[x]
+            if str(x) in urls_map:
+                urls_map[str(x)]["page_rank"] = page_rank_values[x]
         
         # Save the calculated map into a file
         with open(str(urls_map_file) + ".page_rank", "w") as file:
